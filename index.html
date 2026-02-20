@@ -78,7 +78,7 @@
                 </div>
                 <div>Gestor<span class="text-primary-600 dark:text-primary-400">Serviços</span></div>
             </h1>
-            <p class="text-xs text-gray-500 dark:text-gray-400 mt-2 font-medium">QA Automation Suite v5.1</p>
+            <p class="text-xs text-gray-500 dark:text-gray-400 mt-2 font-medium">QA Automation Suite v5.5</p>
         </div>
 
         <nav class="flex-1 px-6 space-y-2 overflow-y-auto custom-scrollbar">
@@ -224,7 +224,7 @@
 
             <div class="grid grid-cols-1 xl:grid-cols-12 gap-8">
                 
-                <div class="xl:col-span-5 space-y-6">
+                <div class="xl:col-span-4 space-y-6">
                     <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-200 dark:border-slate-700 overflow-hidden ring-1 ring-black/5">
                         <div class="px-6 py-4 border-b border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-800 flex justify-between items-center">
                             <h3 class="font-bold text-gray-900 dark:text-white flex items-center gap-2"><i data-lucide="database" size="18" class="text-primary-500"></i> Configuração de Massa</h3>
@@ -265,31 +265,38 @@
                     </div>
                 </div>
 
-                <div class="xl:col-span-7 space-y-6 flex flex-col">
+                <div class="xl:col-span-8 space-y-6 flex flex-col">
                     
                     <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-200 dark:border-slate-700 overflow-hidden flex-shrink-0">
                         <div class="p-6 bg-gradient-to-r from-gray-50 to-white dark:from-slate-800 dark:to-slate-800/80 border-b border-gray-200 dark:border-slate-700">
-                            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-end">
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-12 gap-3 items-end">
                                 
-                                <div class="md:col-span-3">
-                                    <label class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider block mb-2">Segmento</label>
-                                    <select id="chi_select_segment" class="w-full px-4 py-3 bg-white dark:bg-slate-900 border border-gray-300 dark:border-slate-600 rounded-xl text-sm font-semibold focus:ring-2 focus:ring-primary-500 outline-none dark:text-white cursor-pointer shadow-sm">
+                                <div class="md:col-span-2">
+                                    <label class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider block mb-2">Seg.</label>
+                                    <select id="chi_select_segment" class="w-full px-3 py-3 bg-white dark:bg-slate-900 border border-gray-300 dark:border-slate-600 rounded-xl text-sm font-semibold focus:ring-2 focus:ring-primary-500 outline-none dark:text-white cursor-pointer shadow-sm">
                                         <option value="pf">PF</option>
                                         <option value="pj">PJ</option>
                                     </select>
                                 </div>
 
-                                <div class="md:col-span-6">
+                                <div class="md:col-span-7">
                                     <label class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider block mb-2">Tipo de Teste (Payload)</label>
-                                    <select id="chi_select_test" class="w-full px-4 py-3 bg-white dark:bg-slate-900 border border-gray-300 dark:border-slate-600 rounded-xl text-sm font-semibold focus:ring-2 focus:ring-primary-500 outline-none dark:text-white cursor-pointer shadow-sm">
-                                        <option value="sweeping">Production Funcional Tests For Automatic Sweeping Payments – API Version 2.2 – Antigo – Sweeping Accounts</option>
-                                        <option value="payments">Production Functional Testes for Automatic Pix Payments – API Version 2.2 – Antigo pix payments</option>
-                                        <option value="redirect">Production Functions Tests for No Redirect Payments - API Version 2.2 - novo</option>
-                                        <option value="scheduling">Production Functional Tests For Automatic Pix Payments Scheduling – API Version 2.2 – Pix Payments Scheduling</option>
-                                        <option value="e2e">Production Funcional Tests For Payments E22 Scheduling – API Version 4 – antigo Payments e2e Scheduling</option>
-                                        <option value="no_redirect_auto_novo" class="text-primary-600 dark:text-primary-400">Production Functional Tests For no Redirect Automatic Pix Payments - API Version 2.2 - Novo</option>
-                                        <option value="no_redirect_pix_novo" class="text-primary-600 dark:text-primary-400">No Redirect Pix Payments "Novo"</option>
-                                        <option value="no_redirect_sched_novo" class="text-primary-600 dark:text-primary-400">Prodution Funcional Tests For No Redirect Automatic Pix Payments Scheduling – API Version 2.2 – Novo</option>
+                                    <select id="chi_select_test" class="w-full px-3 py-3 bg-white dark:bg-slate-900 border border-gray-300 dark:border-slate-600 rounded-xl text-[12px] md:text-[13px] font-medium focus:ring-2 focus:ring-primary-500 outline-none dark:text-white cursor-pointer shadow-sm truncate">
+                                        
+                                        <option value="sweeping">Production Funcional Tests For Automatic Sweeping Payments</option>
+                                        <option value="payments">Production Functional Testes for Automatic Pix Payments</option>
+                                        <option value="redirect">Production Functions Tests for No Redirect Payments</option>
+                                        <option value="scheduling">Production Functional Tests For Automatic Pix Payments Scheduling</option>
+                                        <option value="e2e">Production Funcional Tests For Payments E2E - API Version 4</option>
+                                        
+                                        <option disabled value="" class="font-bold text-gray-400 dark:text-gray-600 text-center">──────────────── NOVOS TESTES ────────────────</option>
+
+                                        <option value="no_redirect_auto_novo" class="text-primary-700 dark:text-primary-400 font-bold">Production Funcional Tests For No Redirect Automatic Pix Payments - API Version 2.2</option>
+                                        <option value="no_redirect_pix_novo" class="text-primary-700 dark:text-primary-400 font-bold">Production Funcional Tests For No Redirect Pix Payments - API Version 2.2</option>
+                                        <option value="no_redirect_auto_sched_novo" class="text-primary-700 dark:text-primary-400 font-bold">Production Funcional Tests For no Redirect Automatic Pix Payments Scheduling - API Version 2.2</option>
+                                        <option value="no_redirect_sched_novo" class="text-primary-700 dark:text-primary-400 font-bold">Production Funcional Tests For No Redirect Payments Scheduling - API Version 2.2</option>
+                                        
                                     </select>
                                 </div>
 
@@ -350,7 +357,7 @@
                     document.documentElement.classList.remove('dark');
                 }
 
-                this.switchTab('nomenclatura'); 
+                this.switchTab('chicago'); 
                 chicago.loadSession(); 
             },
 
@@ -807,6 +814,8 @@
                         break;
 
                     // --- NOVOS PF ---
+                    // Cobre também o caso "Automatic ... Scheduling" que tem a mesma regra
+                    case 'no_redirect_auto_sched_novo_pf':
                     case 'no_redirect_auto_novo_pf':
                         payload.resource = {
                             loggedUserIdentification: d.cpf,
@@ -820,6 +829,11 @@
                             creditorCpfCnpj: "63602987000134",
                             brazilCpf: d.cpf
                         };
+                        
+                        // O "Automatic + Scheduling" recebe a chave Proxy adicionalmente
+                        if (type === 'no_redirect_auto_sched_novo_pf') {
+                            payload.resource.creditorProxy = "1b25f9c3-8c4c-4491-b67f-10cf007d500c";
+                        }
                         break;
 
                     case 'no_redirect_pix_novo_pf':
@@ -904,6 +918,7 @@
                         break;
 
                     // --- NOVOS PJ ---
+                    case 'no_redirect_auto_sched_novo_pj':
                     case 'no_redirect_auto_novo_pj':
                         payload.resource = {
                             loggedUserIdentification: d.cpf,
@@ -919,6 +934,10 @@
                             businessEntityIdentification: d.cnpj,
                             brazilCnpj: d.cnpj
                         };
+                        
+                        if (type === 'no_redirect_auto_sched_novo_pj') {
+                            payload.resource.creditorProxy = "1b25f9c3-8c4c-4491-b67f-10cf007d500c";
+                        }
                         break;
 
                     case 'no_redirect_pix_novo_pj':
