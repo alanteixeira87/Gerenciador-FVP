@@ -78,11 +78,11 @@
                 </div>
                 <div>Gestor<span class="text-primary-600 dark:text-primary-400">Serviços</span></div>
             </h1>
-            <p class="text-xs text-gray-500 dark:text-gray-400 mt-2 font-medium">QA Automation Suite v5.5</p>
+            <p class="text-xs text-gray-500 dark:text-gray-400 mt-2 font-medium">QA Automation Suite v5.6</p>
         </div>
 
         <nav class="flex-1 px-6 space-y-2 overflow-y-auto custom-scrollbar">
-            <div class="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3 mt-4 px-4">Testes UI</div>
+            <div class="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3 mt-4 px-4">Testes FVP</div>
             <button onclick="app.switchTab('nomenclatura')" id="nav-nomenclatura" class="group w-full flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl transition-all duration-200">
                 <i data-lucide="file-signature" size="20"></i> Nomenclatura
             </button>
@@ -95,7 +95,7 @@
 
             <div class="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3 mt-8 px-4">Testes API</div>
             <button onclick="app.switchTab('chicago')" id="nav-chicago" class="group w-full flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl transition-all duration-200">
-                <i data-lucide="braces" size="20"></i> JSON Chicago
+                <i data-lucide="braces" size="20"></i> Gerador de JSON
             </button>
         </nav>
 
@@ -222,14 +222,32 @@
                 </div>
             </div>
 
+            <div id="releaseNote" class="bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-200 dark:border-indigo-500/20 rounded-2xl p-5 relative fade-in">
+                <button onclick="document.getElementById('releaseNote').style.display='none'" class="absolute top-4 right-4 text-indigo-400 hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors">
+                    <i data-lucide="x" size="20"></i>
+                </button>
+                <div class="flex gap-4">
+                    <div class="mt-1 bg-indigo-100 dark:bg-indigo-500/20 p-2.5 rounded-xl text-indigo-600 dark:text-indigo-400 shrink-0 h-min">
+                        <i data-lucide="bell-ring" size="22"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-indigo-900 dark:text-indigo-300 text-sm md:text-base uppercase tracking-wider">📣 Novidades da Versão 5.6</h4>
+                        <ul class="text-sm text-indigo-800 dark:text-indigo-200 mt-2 space-y-1.5 list-disc list-inside ml-1">
+                            <li>Os campos <strong>Alias</strong> e <strong>AS-ID</strong> inclusos junto a área de geração de json. Eles <span class="font-bold underline">não ficam salvos no backup</span> para facilitar a troca ágil durante a execução dos testes.</li>
+                            <li>A estrutura do JSON foi atualizada: agora inclui automaticamente a camada <code class="bg-indigo-100 dark:bg-indigo-900/50 px-1 py-0.5 rounded">"alias"</code> e <code class="bg-indigo-100 dark:bg-indigo-900/50 px-1 py-0.5 rounded">"server"</code> no início da requisição.</li>
+                            <li>A lista de testes no dropdown foi <strong>simplificada</strong> (sem os textos após os hifens) e os novos testes de Redirect foram organizados e separados.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
             <div class="grid grid-cols-1 xl:grid-cols-12 gap-8">
                 
                 <div class="xl:col-span-4 space-y-6">
                     <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-200 dark:border-slate-700 overflow-hidden ring-1 ring-black/5">
                         <div class="px-6 py-4 border-b border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-800 flex justify-between items-center">
-                            <h3 class="font-bold text-gray-900 dark:text-white flex items-center gap-2"><i data-lucide="database" size="18" class="text-primary-500"></i> Configuração de Massa</h3>
+                            <h3 class="font-bold text-gray-900 dark:text-white flex items-center gap-2"><i data-lucide="database" size="18" class="text-primary-500"></i> Configuração de Dados</h3>
                             <button onclick="chicago.saveSession()" class="text-xs px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 shadow-sm transition flex items-center gap-1.5 font-medium">
-                                <i data-lucide="save" size="14"></i> Salvar Dados
+                                <i data-lucide="save" size="14"></i> Salvar 
                             </button>
                         </div>
                         
@@ -248,8 +266,8 @@
                                 </div>
                             </div>
 
-                            <div class="space-y-4 pt-4">
-                                <h4 class="text-sm font-bold text-pink-600 dark:text-pink-400 uppercase tracking-wider border-b border-gray-200 dark:border-slate-700 pb-2 flex items-center gap-2"><i data-lucide="building-2" size="16"></i> Pessoa Jurídica (PJ)</h4>
+                            <div class="space-y-4 pt-4 border-t border-gray-200 dark:border-slate-700">
+                                <h4 class="text-sm font-bold text-pink-600 dark:text-pink-400 uppercase tracking-wider pb-2 flex items-center gap-2"><i data-lucide="building-2" size="16"></i> Pessoa Jurídica (PJ)</h4>
                                 <div><label class="text-xs font-bold text-gray-500 dark:text-gray-400 block mb-1">Nome da Empresa</label><input type="text" id="chi_empresa" class="w-full px-3 py-2.5 bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-600 rounded-lg text-sm dark:text-white"></div>
                                 <div><label class="text-xs font-bold text-gray-500 dark:text-gray-400 block mb-1">CNPJ</label><input type="text" id="chi_cnpj" class="w-full px-3 py-2.5 bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-600 rounded-lg text-sm dark:text-white font-mono" maxlength="14" oninput="this.value = this.value.replace(/\D/g, '')" placeholder="Apenas números"></div>
                                 <div class="grid grid-cols-2 gap-4">
@@ -268,8 +286,19 @@
                 <div class="xl:col-span-8 space-y-6 flex flex-col">
                     
                     <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-200 dark:border-slate-700 overflow-hidden flex-shrink-0">
-                        <div class="p-6 bg-gradient-to-r from-gray-50 to-white dark:from-slate-800 dark:to-slate-800/80 border-b border-gray-200 dark:border-slate-700">
+                        <div class="p-6 bg-gradient-to-r from-gray-50 to-white dark:from-slate-800 dark:to-slate-800/80 border-b border-gray-200 dark:border-slate-700 space-y-4">
                             
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pb-4 border-b border-gray-200 dark:border-slate-700/50">
+                                <div>
+                                    <label class="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider block mb-1">Alias</label>
+                                    <input type="text" id="chi_alias" class="w-full px-4 py-2.5 bg-white dark:bg-slate-900 border border-gray-300 dark:border-slate-600 rounded-xl text-sm focus:ring-2 focus:ring-primary-500 outline-none dark:text-white shadow-sm" placeholder="Ex: alias-teste">
+                                </div>
+                                <div>
+                                    <label class="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider block mb-1">AS-ID (Auth Server)</label>
+                                    <input type="text" id="chi_as_id" class="w-full px-4 py-2.5 bg-white dark:bg-slate-900 border border-gray-300 dark:border-slate-600 rounded-xl text-sm focus:ring-2 focus:ring-primary-500 outline-none dark:text-white shadow-sm" placeholder="Ex: 12345-abcde">
+                                </div>
+                            </div>
+
                             <div class="grid grid-cols-1 md:grid-cols-12 gap-3 items-end">
                                 
                                 <div class="md:col-span-2">
@@ -317,7 +346,7 @@
                                 <i data-lucide="copy" size="14"></i> Copiar Código
                             </button>
                         </div>
-                        <textarea id="chi_result" readonly class="flex-1 w-full bg-transparent text-green-400 font-mono text-sm p-6 resize-none outline-none custom-scrollbar" placeholder="// Selecione as opções acima e clique em Gerar JSON..."></textarea>
+                        <textarea id="chi_result" readonly class="flex-1 w-full bg-transparent text-green-400 font-mono text-sm p-6 resize-none outline-none custom-scrollbar" placeholder="// Preencha os campos e clique em Gerar JSON..."></textarea>
                     </div>
 
                 </div>
@@ -558,7 +587,7 @@
                 const commonPhrase = "Anexo o log com detalhamento.\n";
                 let text = "";
                 if (stage === '1') {
-                    if(!analysis && document.getElementById('errorAnalysis').value === "") document.getElementById('errorAnalysis').value = "Boa tarde, o ticket está classificado como erro técnico. Favor encaminhar para a Raidiam.";
+                    if(!analysis && document.getElementById('errorAnalysis').value === "") document.getElementById('errorAnalysis').value = "Boa tarde, o teste foi realizado pelo usuário mas apresentou erro.";
                     text = `Prezados, realizamos o teste solicitado, porém apresentou erro antes do redirecionamento.\n${commonPhrase}Número de tentativas: ${attempts}\nAnálise do QA: ${document.getElementById('errorAnalysis').value}`;
                 } else if (stage === '2') {
                     text = `Prezados, realizamos o teste solicitado, porém apresentou durante a etapa de login do usuário.\n${commonPhrase}Versão do app: ${version}\nNúmero de tentativas: ${attempts}\nPlataforma: ${platform}\nAnálise do QA: ${analysis}`;
@@ -571,7 +600,7 @@
                 }
                 document.getElementById('errorResult').value = text;
             },
-            insertRaidiamText: function() { document.getElementById('errorAnalysis').value = "Boa tarde, o ticket está classificado como erro técnico. Favor encaminhar para a Raidiam."; this.updateErrorReport(); },
+            insertRaidiamText: function() { document.getElementById('errorAnalysis').value = "Boa tarde, o teste foi realizado pelo usuário mas apresentou erro."; this.updateErrorReport(); },
             getStored: () => JSON.parse(localStorage.getItem('qa_scheduler_v2') || '[]'),
             saveTest: function() { 
                 const d = { id: Date.now(), brand: document.getElementById('agendaMarca').value, seg: document.getElementById('agendaSegmento').value, type: document.getElementById('agendaTipo').value, start: document.getElementById('agendaInicio').value, end: document.getElementById('agendaFim').value, desc: document.getElementById('agendaInstrucoes').value };
@@ -745,11 +774,20 @@
                 if(!this.saveSession(true)) return; 
                 
                 const d = this.getCampos();
+                const aliasVal = document.getElementById('chi_alias').value;
+                const asIdVal = document.getElementById('chi_as_id').value;
                 
                 if(!d.cpf) { app.showToast("O campo CPF é obrigatório na Configuração.", "error"); return; }
                 if(type.includes('pj') && !d.cnpj) { app.showToast("O campo CNPJ é obrigatório para payloads PJ.", "error"); return; }
 
-                let payload = { "resource": {}, "directory": {} };
+                let payload = {
+                    "alias": aliasVal,
+                    "server": {
+                        "authorisationServerId": asIdVal
+                    },
+                    "resource": {},
+                    "directory": {}
+                };
 
                 switch(type) {
                     
@@ -838,7 +876,11 @@
 
                     case 'no_redirect_pix_novo_pf':
                         payload = {
-                            resource: {
+                            "alias": aliasVal,
+                            "server": {
+                                "authorisationServerId": asIdVal
+                            },
+                            "resource": {
                                 loggedUserIdentification: d.cpf,
                                 creditorAccountIspb: "18236120",
                                 creditorAccountIssuer: "0001",
@@ -942,7 +984,11 @@
 
                     case 'no_redirect_pix_novo_pj':
                         payload = {
-                            resource: {
+                            "alias": aliasVal,
+                            "server": {
+                                "authorisationServerId": asIdVal
+                            },
+                            "resource": {
                                 loggedUserIdentification: d.cpf,
                                 creditorAccountIspb: "18236120",
                                 creditorAccountIssuer: "0001",
