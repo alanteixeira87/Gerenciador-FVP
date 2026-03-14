@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <meta name="robots" content="noindex, nofollow">
-    
     <title>Gestor de Serviços | QA Suite</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
@@ -78,7 +76,7 @@
                 </div>
                 <div>Gestor<span class="text-primary-600 dark:text-primary-400">Serviços</span></div>
             </h1>
-            <p class="text-xs text-gray-500 dark:text-gray-400 mt-2 font-medium">QA Automation Suite v5.6</p>
+            <p class="text-xs text-gray-500 dark:text-gray-400 mt-2 font-medium">QA Automation Suite v5.7</p>
         </div>
 
         <nav class="flex-1 px-6 space-y-2 overflow-y-auto custom-scrollbar">
@@ -97,6 +95,11 @@
             <button onclick="app.switchTab('chicago')" id="nav-chicago" class="group w-full flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl transition-all duration-200">
                 <i data-lucide="braces" size="20"></i> Gerador de JSON
             </button>
+
+            <div class="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3 mt-8 px-4">Links Úteis</div>
+            <a href="https://gitlab.com/raidiam-conformance/open-finance/certification/-/wikis/Orientacoes_Execucao_FVP?redirected_from=Scheduled-Tests-[PT]" target="_blank" class="group w-full flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-slate-700/50 transition-all duration-200">
+                <i data-lucide="external-link" size="20"></i> Documentação wiki OP
+            </a>
         </nav>
 
         <div class="p-6 border-t border-gray-200 dark:border-slate-700 shrink-0">
@@ -231,11 +234,11 @@
                         <i data-lucide="bell-ring" size="22"></i>
                     </div>
                     <div>
-                        <h4 class="font-bold text-indigo-900 dark:text-indigo-300 text-sm md:text-base uppercase tracking-wider">📣 Novidades da Versão 5.6</h4>
+                        <h4 class="font-bold text-indigo-900 dark:text-indigo-300 text-sm md:text-base uppercase tracking-wider">📣 Novidades da Versão 5.7</h4>
                         <ul class="text-sm text-indigo-800 dark:text-indigo-200 mt-2 space-y-1.5 list-disc list-inside ml-1">
-                            <li>Os campos <strong>Alias</strong> e <strong>AS-ID</strong> inclusos junto a área de geração de json. Eles <span class="font-bold underline">não ficam salvos no backup</span> para facilitar a troca ágil durante a execução dos testes.</li>
-                            <li>A estrutura do JSON foi atualizada: agora inclui automaticamente a camada <code class="bg-indigo-100 dark:bg-indigo-900/50 px-1 py-0.5 rounded">"alias"</code> e <code class="bg-indigo-100 dark:bg-indigo-900/50 px-1 py-0.5 rounded">"server"</code> no início da requisição.</li>
-                            <li>A lista de testes no dropdown foi <strong>simplificada</strong> (sem os textos após os hifens) e os novos testes de Redirect foram organizados e separados.</li>
+                            <li>O campo <strong>creditorProxy</strong> foi removido exclusivamente do teste <em>No Redirect Automatic Pix Payments Scheduling V2.2</em> (PF e PJ).</li>
+                            <li>Novo botão adicionado no menu lateral para acesso rápido à <strong>Documentação wiki OP</strong>.</li>
+                            <li>Os campos Alias e AS-ID continuam facilitando a troca ágil sem salvar no backup.</li>
                         </ul>
                     </div>
                 </div>
@@ -851,7 +854,6 @@
                         break;
 
                     // --- NOVOS PF ---
-                    // Cobre também o caso "Automatic ... Scheduling" que tem a mesma regra
                     case 'no_redirect_auto_sched_novo_pf':
                     case 'no_redirect_auto_novo_pf':
                         payload.resource = {
@@ -866,11 +868,6 @@
                             creditorCpfCnpj: "63602987000134",
                             brazilCpf: d.cpf
                         };
-                        
-                        // O "Automatic + Scheduling" recebe a chave Proxy adicionalmente
-                        if (type === 'no_redirect_auto_sched_novo_pf') {
-                            payload.resource.creditorProxy = "1b25f9c3-8c4c-4491-b67f-10cf007d500c";
-                        }
                         break;
 
                     case 'no_redirect_pix_novo_pf':
@@ -975,10 +972,6 @@
                             businessEntityIdentification: d.cnpj,
                             brazilCnpj: d.cnpj
                         };
-                        
-                        if (type === 'no_redirect_auto_sched_novo_pj') {
-                            payload.resource.creditorProxy = "1b25f9c3-8c4c-4491-b67f-10cf007d500c";
-                        }
                         break;
 
                     case 'no_redirect_pix_novo_pj':
