@@ -43,7 +43,7 @@
         .custom-scrollbar::-webkit-scrollbar-track { background: rgba(0,0,0,0.05); }
         .dark .custom-scrollbar::-webkit-scrollbar-track { background: rgba(255,255,255,0.02); }
         
-        /* Fundo desfocado para o Login */
+        /* Fundo desfocado */
         .blur-bg { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
     </style>
 </head>
@@ -68,6 +68,107 @@
             </p>
         </div>
     </div>
+
+    <div id="guideModal" class="fixed inset-0 z-[110] bg-slate-900/80 blur-bg items-center justify-center p-4 transition-opacity duration-300 hidden opacity-0 flex">
+        <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl w-full max-w-2xl border border-gray-200 dark:border-slate-700 transform transition-transform scale-95 flex flex-col max-h-[90vh]">
+            <div class="px-6 py-4 border-b border-gray-200 dark:border-slate-700 flex justify-between items-center bg-gray-50 dark:bg-slate-800 rounded-t-2xl">
+                <h3 class="text-lg font-bold text-gray-900 dark:text-white flex items-center gap-2">
+                    <i data-lucide="book-open" class="text-primary-500" size="20"></i> Orientações de Execução
+                </h3>
+                <button onclick="app.closeGuideModal()" class="text-gray-400 hover:text-gray-600 dark:hover:text-white transition-colors">
+                    <i data-lucide="x" size="24"></i>
+                </button>
+            </div>
+            <div class="p-6 overflow-y-auto custom-scrollbar space-y-6">
+                
+                <p class="text-sm text-gray-600 dark:text-gray-300">
+                    Siga as diretrizes abaixo para a execução correta dos testes <span class="font-bold text-primary-600 dark:text-primary-400">JSR / No Redirect</span>.
+                </p>
+
+                <div class="bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/20 rounded-xl p-4">
+                    <h4 class="font-bold text-blue-800 dark:text-blue-300 flex items-center gap-2 text-sm mb-2">
+                        <i data-lucide="coins" size="16"></i> Gestão de Saldo
+                    </h4>
+                    <ul class="text-sm text-blue-700 dark:text-blue-200 space-y-2 list-disc list-inside">
+                        <li>Saldo mínimo exigido: <strong>R$ 2,00</strong> por teste executado.</li>
+                        <li><strong>Atenção:</strong> Após cada teste, verifique se o saldo foi debitado da conta. Em caso positivo, é <strong>obrigatório completar o saldo mínimo</strong> antes de seguir para os próximos testes, evitando falsos erros por falta de saldo e retrabalho.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-gray-100 dark:bg-slate-900/50 border border-gray-200 dark:border-slate-700 rounded-xl p-4">
+                    <div class="flex justify-between items-center mb-3">
+                        <h4 class="font-bold text-gray-800 dark:text-gray-200 flex items-center gap-2 text-sm">
+                            <i data-lucide="smartphone" size="16"></i> Configurações no Dispositivo Mobile
+                        </h4>
+                        <button onclick="app.openImageModal()" class="px-3 py-1.5 bg-gray-200 dark:bg-slate-700 hover:bg-gray-300 dark:hover:bg-slate-600 text-gray-700 dark:text-gray-200 text-xs font-bold rounded-lg transition-colors flex items-center gap-1.5 shadow-sm">
+                            <i data-lucide="image" size="14"></i> Visualizar Exemplo
+                        </button>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-3">
+                        <div class="bg-white dark:bg-slate-800 p-3 rounded-lg border border-gray-200 dark:border-slate-600">
+                            <span class="block text-xs text-gray-500 dark:text-gray-400">Prazo do Consentimento</span>
+                            <span class="font-semibold text-sm dark:text-white">Indeterminado</span>
+                        </div>
+                        <div class="bg-white dark:bg-slate-800 p-3 rounded-lg border border-gray-200 dark:border-slate-600">
+                            <span class="block text-xs text-gray-500 dark:text-gray-400">Máx. por Transação</span>
+                            <span class="font-semibold text-sm dark:text-white">R$ 1,00</span>
+                        </div>
+                        <div class="bg-white dark:bg-slate-800 p-3 rounded-lg border border-gray-200 dark:border-slate-600">
+                            <span class="block text-xs text-gray-500 dark:text-gray-400">Valor Máximo Diário</span>
+                            <span class="font-semibold text-sm dark:text-white">R$ 1,00</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1.5 mt-2">
+                        <i data-lucide="info" size="14"></i> Nota: Cada marca possui sua regra de negócio para nomenclatura; não devemos interferir neste ponto.
+                    </p>
+                </div>
+
+                <div class="bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/20 rounded-xl p-4">
+                    <h4 class="font-bold text-red-800 dark:text-red-300 flex items-center gap-2 text-sm mb-3">
+                        <i data-lucide="alert-triangle" size="16"></i> Pontos Críticos
+                    </h4>
+                    <ul class="text-sm text-red-700 dark:text-red-200 space-y-3 list-disc list-inside">
+                        <li>
+                            Caso a marca <strong>não possua</strong> a opção de tempo "Indeterminado" dentro do prazo estipulado, <strong>o teste deve ser interrompido imediatamente</strong>. Colete as devidas evidências (print da tela mostrando a ausência da opção no select correspondente).
+                        </li>
+                        <li>
+                            <strong>Validação Obrigatória:</strong> Em algumas marcas, o campo prazo vem preenchido por default como "Indeterminado". É <strong>obrigatório</strong> que o QA abra o dropdown e valide se realmente está configurado corretamente, pois algumas marcas "consideram o prazo de 5 anos" como indeterminado.
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-orange-50 dark:bg-orange-500/10 border border-orange-200 dark:border-orange-500/20 rounded-xl p-4">
+                    <h4 class="font-bold text-orange-800 dark:text-orange-300 flex items-center gap-2 text-sm mb-2">
+                        <i data-lucide="shield-alert" size="16"></i> Mitigação de Falsos Negativos
+                    </h4>
+                    <p class="text-sm text-orange-700 dark:text-orange-200">
+                        Antes de realizar o teste, entre na conta pertinente e <strong>verifique se a mesma está configurada corretamente como PF ou PJ</strong>. Foi observado que algumas marcas alternam as contas dentro do mesmo aplicativo, o que pode gerar falhas inesperadas na jornada.
+                    </p>
+                </div>
+
+                <div class="mt-4 p-3 bg-gray-100 dark:bg-slate-900/50 rounded-xl border border-gray-200 dark:border-slate-700 text-center">
+                    <p class="text-xs text-gray-600 dark:text-gray-400 font-medium">Lembrando: caso seja necessário qualquer implementação, ajuste ou ajuda, basta entrar em contato.</p>
+                </div>
+
+            </div>
+            <div class="px-6 py-4 border-t border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-800 rounded-b-2xl text-right">
+                <button onclick="app.closeGuideModal()" class="px-5 py-2.5 bg-primary-600 hover:bg-primary-700 text-white text-sm font-semibold rounded-lg shadow-sm transition-all active:scale-95">
+                    Entendido
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="imageModal" class="fixed inset-0 z-[120] bg-slate-900/90 blur-bg items-center justify-center p-4 transition-opacity duration-300 hidden opacity-0 flex" onclick="app.closeImageModal()">
+        <div class="relative max-w-full max-h-full flex justify-center items-center" onclick="event.stopPropagation()">
+            <button onclick="app.closeImageModal()" class="absolute -top-10 right-0 text-white hover:text-gray-300 transition-colors">
+                <i data-lucide="x" size="32"></i>
+            </button>
+            <img src="/assets/Imagem referencia.png" alt="Exemplo de Configuração Mobile" class="max-h-[85vh] object-contain rounded-xl shadow-2xl border border-slate-700">
+        </div>
+    </div>
+
     <aside class="w-72 bg-white dark:bg-slate-800 border-r border-gray-200 dark:border-slate-700 flex flex-col z-20 hidden md:flex transition-colors duration-300 h-full">
         <div class="p-8 shrink-0">
             <h1 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white flex items-center gap-3">
@@ -236,9 +337,10 @@
                     <div>
                         <h4 class="font-bold text-indigo-900 dark:text-indigo-300 text-sm md:text-base uppercase tracking-wider">📣 Novidades da Versão 5.7</h4>
                         <ul class="text-sm text-indigo-800 dark:text-indigo-200 mt-2 space-y-1.5 list-disc list-inside ml-1">
-                            <li>O campo <strong>creditorProxy</strong> foi removido exclusivamente do teste <em>No Redirect Automatic Pix Payments Scheduling V2.2</em> (PF e PJ).</li>
-                            <li>Novo botão adicionado no menu lateral para acesso rápido à <strong>Documentação wiki OP</strong>.</li>
-                            <li>Os campos Alias e AS-ID continuam facilitando a troca ágil sem salvar no backup.</li>
+                           <li><strong>Novo Modal de Orientações:</strong> Guia interativo com regras de saldo, limites e configuração mobile para testes JSR/No Redirect.</li>
+                            <li><strong>Visualizador de Imagens:</strong> Adicionado recurso para exibir exemplos visuais de setup na tela de orientações.</li>
+                            <li><strong>Alertas de Qualidade:</strong> Novos pontos críticos inseridos para mitigar falsos negativos e falhas em prazos "Indeterminados".</li>
+                        </ul>
                         </ul>
                     </div>
                 </div>
@@ -302,9 +404,9 @@
                                 </div>
                             </div>
 
-                            <div class="grid grid-cols-1 md:grid-cols-12 gap-3 items-end">
+                            <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
                                 
-                                <div class="md:col-span-2">
+                                <div class="md:col-span-3">
                                     <label class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider block mb-2">Seg.</label>
                                     <select id="chi_select_segment" class="w-full px-3 py-3 bg-white dark:bg-slate-900 border border-gray-300 dark:border-slate-600 rounded-xl text-sm font-semibold focus:ring-2 focus:ring-primary-500 outline-none dark:text-white cursor-pointer shadow-sm">
                                         <option value="pf">PF</option>
@@ -312,7 +414,7 @@
                                     </select>
                                 </div>
 
-                                <div class="md:col-span-7">
+                                <div class="md:col-span-9">
                                     <label class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider block mb-2">Tipo de Teste (Payload)</label>
                                     <select id="chi_select_test" class="w-full px-3 py-3 bg-white dark:bg-slate-900 border border-gray-300 dark:border-slate-600 rounded-xl text-[12px] md:text-[13px] font-medium focus:ring-2 focus:ring-primary-500 outline-none dark:text-white cursor-pointer shadow-sm truncate">
                                         
@@ -331,13 +433,17 @@
                                     </select>
                                 </div>
 
-                                <div class="md:col-span-3">
-                                    <button onclick="chicago.generateFromSelect()" class="w-full px-4 py-3 bg-gray-900 hover:bg-black dark:bg-primary-600 dark:hover:bg-primary-500 text-white text-sm font-bold rounded-xl shadow-lg transition-all active:scale-95 flex items-center justify-center gap-2">
-                                        <i data-lucide="zap" size="18"></i> Gerar JSON
-                                    </button>
-                                </div>
-
                             </div>
+
+                            <div class="flex flex-col md:flex-row gap-3 mt-4">
+                                <button onclick="chicago.generateFromSelect()" class="flex-1 px-4 py-3 bg-gray-900 hover:bg-black dark:bg-primary-600 dark:hover:bg-primary-500 text-white text-sm font-bold rounded-xl shadow-lg transition-all active:scale-95 flex items-center justify-center gap-2">
+                                    <i data-lucide="zap" size="18"></i> Gerar JSON
+                                </button>
+                                <button onclick="app.openGuideModal()" class="flex-1 px-4 py-3 bg-white dark:bg-slate-800 hover:bg-gray-50 dark:hover:bg-slate-700 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-slate-600 text-sm font-bold rounded-xl shadow-sm transition-all active:scale-95 flex items-center justify-center gap-2">
+                                    <i data-lucide="book-open" size="18"></i> Orientações de Execução
+                                </button>
+                            </div>
+
                         </div>
                     </div>
 
@@ -390,6 +496,39 @@
 
                 this.switchTab('chicago'); 
                 chicago.loadSession(); 
+            },
+
+            // ==========================================
+            // LÓGICA DO MODAL DE ORIENTAÇÕES E IMAGEM
+            // ==========================================
+            openGuideModal: function() {
+                const m = document.getElementById('guideModal');
+                m.classList.remove('hidden');
+                setTimeout(() => { 
+                    m.classList.remove('opacity-0'); 
+                    m.querySelector('div').classList.remove('scale-95'); 
+                    m.querySelector('div').classList.add('scale-100'); 
+                }, 10);
+            },
+
+            closeGuideModal: function() {
+                const m = document.getElementById('guideModal');
+                m.classList.add('opacity-0');
+                m.querySelector('div').classList.remove('scale-100');
+                m.querySelector('div').classList.add('scale-95');
+                setTimeout(() => { m.classList.add('hidden'); }, 300);
+            },
+
+            openImageModal: function() {
+                const m = document.getElementById('imageModal');
+                m.classList.remove('hidden');
+                setTimeout(() => { m.classList.remove('opacity-0'); }, 10);
+            },
+
+            closeImageModal: function() {
+                const m = document.getElementById('imageModal');
+                m.classList.add('opacity-0');
+                setTimeout(() => { m.classList.add('hidden'); }, 300);
             },
 
             // ==========================================
