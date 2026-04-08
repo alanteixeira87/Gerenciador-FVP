@@ -45,6 +45,45 @@
         
         /* Fundo desfocado */
         .blur-bg { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+
+        /* Tooltip CSS puro */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            opacity: 0;
+            width: max-content;
+            background-color: #1f2937;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 6px 10px;
+            position: absolute;
+            z-index: 50;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: opacity 0.2s, visibility 0.2s;
+            font-size: 0.75rem;
+            font-weight: 500;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .tooltip .tooltiptext::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #1f2937 transparent transparent transparent;
+        }
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
     </style>
 </head>
 <body class="bg-gray-50 dark:bg-slate-900 text-gray-900 dark:text-gray-100 h-screen flex overflow-hidden transition-colors duration-300 selection:bg-primary-500 selection:text-white">
@@ -341,7 +380,6 @@
                             <li><strong>Visualizador de Imagens:</strong> Adicionado recurso para exibir exemplos visuais de setup na tela de orientações.</li>
                             <li><strong>Alertas de Qualidade:</strong> Novos pontos críticos inseridos para mitigar falsos negativos e falhas em prazos "Indeterminados".</li>
                         </ul>
-                        </ul>
                     </div>
                 </div>
             </div>
@@ -455,6 +493,17 @@
                             </button>
                         </div>
                         <textarea id="chi_result" readonly class="flex-1 w-full bg-transparent text-green-400 font-mono text-sm p-6 resize-none outline-none custom-scrollbar" placeholder="// Preencha os campos e clique em Gerar JSON..."></textarea>
+                        
+                        <div class="bg-[#151515] p-4 border-t border-black flex justify-between items-center">
+                            <span class="text-xs text-gray-500 font-mono flex items-center gap-1"><i data-lucide="check-circle-2" size="12" class="text-emerald-500"></i> JSON Pronto para Uso</span>
+                            
+                            <div class="tooltip">
+                                <button onclick="enviarParaFVP()" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white text-sm font-bold rounded-lg shadow flex items-center gap-2 transition">
+                                    Executar no FVP <i data-lucide="external-link" size="16"></i>
+                                </button>
+                                <span class="tooltiptext">Copia o JSON e abre o Conformance Suite Raidiam</span>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
@@ -901,7 +950,6 @@
             outputJson: function(obj) {
                 const str = JSON.stringify(obj, null, 4);
                 document.getElementById('chi_result').value = str;
-                app.copyText('chi_result');
             },
 
             generateFromSelect: function() {
@@ -1152,8 +1200,28 @@
                 }
 
                 this.outputJson(payload);
+                app.showToast("JSON gerado com sucesso!");
             }
         };
+
+        // NOVA FUNÇÃO: COPY & GO (FVP)
+        function enviarParaFVP() {
+            const jsonGerado = document.getElementById('chi_result').value;
+            
+            if(!jsonGerado || jsonGerado.trim() === '' || jsonGerado.includes('// Preencha os campos')) {
+                app.showToast("Gere um JSON primeiro antes de executar!", "error");
+                return;
+            }
+
+            navigator.clipboard.writeText(jsonGerado).then(() => {
+                app.showToast("JSON copiado! Cole na plataforma FVP.");
+                const urlFVP = "https://web.fvp.directory.openbankingbrasil.org.br/schedule-test.html"; 
+                window.open(urlFVP, '_blank');
+            }).catch(err => {
+                console.error("Falha ao copiar:", err);
+                alert("⚠️ O navegador bloqueou a cópia automática. Copie o JSON manualmente.");
+            });
+        }
 
         // INICIALIZAR SISTEMA GERAL
         document.addEventListener('DOMContentLoaded', () => app.init());
