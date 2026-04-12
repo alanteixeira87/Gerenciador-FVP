@@ -216,7 +216,7 @@
                 </div>
                 <div>Gestor<span class="text-primary-600 dark:text-primary-400">Serviços</span></div>
             </h1>
-            <p class="text-xs text-gray-500 dark:text-gray-400 mt-2 font-medium">QA Automation Suite v5.7</p>
+            <p class="text-xs text-gray-500 dark:text-gray-400 mt-2 font-medium">QA Automation Suite v6.3</p>
         </div>
 
         <nav class="flex-1 px-6 space-y-2 overflow-y-auto custom-scrollbar">
@@ -235,6 +235,12 @@
             <button onclick="app.switchTab('chicago')" id="nav-chicago" class="group w-full flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl transition-all duration-200">
                 <i data-lucide="braces" size="20"></i> Gerador de JSON
             </button>
+
+            <div class="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3 mt-8 px-4">Conhecimento</div>
+            <a href="https://alanteixeira87.github.io/Guiadeorienta-o" target="_blank" class="group w-full flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-slate-700/50 transition-all duration-200">
+                <i data-lucide="book-open" size="20"></i> Guia de Orientação
+                <i data-lucide="external-link" size="14" class="ml-auto opacity-50"></i>
+            </a>
 
             <div class="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3 mt-8 px-4">Links Úteis</div>
             <a href="https://gitlab.com/raidiam-conformance/open-finance/certification/-/wikis/Orientacoes_Execucao_FVP?redirected_from=Scheduled-Tests-[PT]" target="_blank" class="group w-full flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-slate-700/50 transition-all duration-200">
@@ -344,7 +350,6 @@
         </div>
 
         <div id="view-chicago" class="hidden fade-in space-y-8 max-w-7xl mx-auto">
-            
             <div class="flex items-center justify-between mb-6">
                 <div class="flex items-center gap-4">
                     <div class="p-3 bg-chicago-800 rounded-xl shadow-lg shadow-chicago-800/30 text-white"><i data-lucide="braces" size="24"></i></div>
@@ -374,11 +379,9 @@
                         <i data-lucide="bell-ring" size="22"></i>
                     </div>
                     <div>
-                        <h4 class="font-bold text-indigo-900 dark:text-indigo-300 text-sm md:text-base uppercase tracking-wider">📣 Novidades da Versão 5.7</h4>
+                        <h4 class="font-bold text-indigo-900 dark:text-indigo-300 text-sm md:text-base uppercase tracking-wider">📣 Atualização (Estabilidade)</h4>
                         <ul class="text-sm text-indigo-800 dark:text-indigo-200 mt-2 space-y-1.5 list-disc list-inside ml-1">
-                           <li><strong>Novo Modal de Orientações:</strong> Guia interativo com regras de saldo, limites e configuração mobile para testes JSR/No Redirect.</li>
-                            <li><strong>Visualizador de Imagens:</strong> Adicionado recurso para exibir exemplos visuais de setup na tela de orientações.</li>
-                            <li><strong>Alertas de Qualidade:</strong> Novos pontos críticos inseridos para mitigar falsos negativos e falhas em prazos "Indeterminados".</li>
+                            <li><strong>Código 100% Original e Estável:</strong> O Gerador JSON voltou à estabilidade total. Link para a wiki adicionado discretamente no menu lateral sem quebrar o DOM.</li>
                         </ul>
                     </div>
                 </div>
@@ -547,9 +550,6 @@
                 chicago.loadSession(); 
             },
 
-            // ==========================================
-            // LÓGICA DO MODAL DE ORIENTAÇÕES E IMAGEM
-            // ==========================================
             openGuideModal: function() {
                 const m = document.getElementById('guideModal');
                 m.classList.remove('hidden');
@@ -580,9 +580,6 @@
                 setTimeout(() => { m.classList.add('hidden'); }, 300);
             },
 
-            // ==========================================
-            // LÓGICA DE SEGURANÇA E BLOQUEIO DE TELA
-            // ==========================================
             checkLogin: function() {
                 const input = document.getElementById('passInput').value;
                 const error = document.getElementById('loginError');
@@ -644,7 +641,6 @@
                 this.showToast("Sessão expirada por inatividade.", "error");
             },
 
-            // --- LÓGICAS DAS ABAS ANTIGAS ---
             populateLists: function() {
                 const createOptions = (arr, elId) => {
                     const el = document.getElementById(elId);
@@ -660,6 +656,8 @@
                     if(el) el.addEventListener('input', () => this.calculateAgenda());
                 });
             },
+            
+            // FUNÇÃO RESTAURADA SEM COMPLEXIDADES
             switchTab: function(tabName) {
                 const activeClasses = "bg-primary-600 text-white shadow-lg shadow-primary-500/20";
                 const inactiveClasses = "text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-slate-700/50";
@@ -677,6 +675,7 @@
                     }
                 });
             },
+            
             toggleTheme: function() {
                 if (document.documentElement.classList.contains('dark')) {
                     document.documentElement.classList.remove('dark');
