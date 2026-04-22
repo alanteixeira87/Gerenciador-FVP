@@ -1,6 +1,9 @@
 const DB = {
     marcas: ["ABC","Accreditto","Ailos","Ame Digital","Asaas","Azimut","Banco do Brasil","Banco do Nordeste","Banrisul","Bari","BMG","Bradesco","BRB","BTG Banking","BV","C6","Caixa","Celcoin","Cielo","Cora","Digio","Efí","Genial","Geru","Getnet","Hyundai","Infinite Pay","Inter","Itaú","Iti","Iugu","Listo","Master","Mei Fácil","Mercado Pago","Mercantil","Midway","Modal","Méliuz","Neon","Next","Nubank","Original","PagBank","Pan","Pic Pay","PlayersBank","Quero Quero Pag","Randon","RecargaPay","Rico","Safra","Santander","Sicoob","Sicredi","Sofisa","Stone","Super Digital","Uber Conta","Up.P","Volvo","WillBank","XP","Ágora Investimentos","Íon","BTG Investimentos","Santander Cartões","Santander Financiamentos","Santander Crédito Imob","Empréstimo Sim","Santander Corretora","Bradescard","Investimentos BB","Toro","Ourocard","BTG Empresas","Iniciador.com","Google Pay","Lina Openx","Banco Industrial","Pernambucanas","Rede","Porto Bank","WHG","MagaluPay","Monte Bravo","Klavi","Mobilize Financial","CrediNissan","Belvo","Àgora Investimento","Crefisa"],
-    testes: ["JO Automatic Pix","JO Invalid Permissions","JO Payments","JO Payments Balances","JO Revoked Consent","JO Revoked Recurring", "JO Invalid Par","JO Invalid Request","JO Balances","JO Revoked Consent", "JO Revoked Enrollment","JO Invalid Request","JO Invalid Par","Pix Verification 1-2","Customer Data Happy Path - V3", "Pix Scheduling 1-2", "JSR Pix Verification 1-2", "Pix Retry 1-3", "Consents V3", "Accounts V3", "Debtor V4", "Not Cancelled V4", "Resources", "Unique", "Custom Core V4", "Real Email Invalid V4", "Fake Email Proxy V4", "SWP Total Allowed", "SWP Accounts Core", "Payments Core V2.2", "Invalid Challenge V2.2", "Invalid Origin V2.2", "Invalid Public Key V2.2", "Invalid RPID V2.2", "Pre-Enrollment V2.2", "Invalid Status V2.2", "Keys Swap V2.2", "Unmatching Fields V2.2", "APX Semanal", "APX Scheduled", "Authorised Executed", "Limits Negative", "Limits", "Not Authorised"]
+    testes: [
+        "JO Automatic Pix","JO Payments","JO Sweeping Payments Balances","JO Sweeping Revoked Consent","JO Sweeping Revoked Recurring","JO Sweeping Invalid Par","JO Sweeping Invalid Request","JO Enrollments Balances","JO Enrollments Revoked Consent","JO Enrollments Revoked Enrollment","JO Enrollments Invalid Request","JO Enrollments Invalid Par","Customer Data Happy Path - V3", "Pix Scheduling 1-2", "JSR Pix Verification 1-2", "Pix Retry 1-3", "Consents V3", "Accounts V3", "Debtor V4", "Not Cancelled V4", "Resources", "Unique", "Custom Core V4", "Real Email Invalid V4", "Fake Email Proxy V4", "SWP Total Allowed", "SWP Accounts Core", "Payments Core V2.2", "Invalid Challenge V2.2", "Invalid Origin V2.2", "Invalid Public Key V2.2", "Invalid RPID V2.2", "Pre-Enrollment V2.2", "Invalid Status V2.2", "Keys Swap V2.2", "Unmatching Fields V2.2", "APX Semanal", "APX Scheduled", "Authorised Executed", "Limits Negative", "Limits", "Not Authorised",
+        "Optimised Journey Core - API Version 1", "Optimised Journey Automatic Payments API - Version 1", "Optimised Journey No Redirect Payments"
+    ]
 };
 
 const app = {
@@ -461,8 +464,6 @@ const chicago = {
                 };
                 break;
 
-                
-                
             case 'sweeping_pf':
                 payload.resource = {
                     loggedUserIdentification: d.cpf,
@@ -569,10 +570,54 @@ const chicago = {
                     brazilCpf: d.cpf
                 };
                 break;
+                
+            // ==============================
+            // OPTIMISED JOURNEY (PF) - DADOS DO USUÁRIO
+            // ==============================
+            
+            case 'opt_core_v1_pf':
+                payload.resource = {
+                    loggedUserIdentification: d.cpf,
+                    creditorAccountIspb: d.ispbpj,
+                    creditorAccountIssuer: d.issuerpj,
+                    creditorAccountNumber: d.contapj,
+                    creditorAccountAccountType: d.tipopj,
+                    creditorName: d.empresa,
+                    brazilCpf: d.cpf,
+                    contractDebtorName: d.usuario,
+                    contractDebtorIdentification: d.cpf,
+                    creditorCpfCnpj: d.cnpj
+                };
+                break;
+                
+            case 'opt_auto_v1_pf':
+                payload.resource = {
+                    loggedUserIdentification: d.cpf,
+                    creditorAccountIspb: d.ispb,
+                    creditorAccountIssuer: d.issuer,
+                    creditorAccountNumber: d.conta,
+                    creditorAccountAccountType: d.tipo,
+                    creditorName: d.usuario,
+                    brazilCpf: d.cpf
+                };
+                break;
+                
+            case 'opt_noredirect_v1_pf':
+                payload.resource = {
+                    loggedUserIdentification: d.cpf,
+                    creditorAccountIspb: d.ispbpj,
+                    creditorAccountIssuer: d.issuerpj,
+                    creditorAccountNumber: d.contapj,
+                    creditorAccountAccountType: d.tipopj,
+                    creditorName: d.empresa,
+                    creditorCpfCnpj: d.cnpj,
+                    brazilCpf: d.cpf
+                };
+                break;
             
             // ==============================
             // PESSOA JURÍDICA (PJ)
-            // =======
+            // ==============================
 
             case 'customer_data_v3_pj':
                 payload.resource = {
@@ -681,6 +726,56 @@ const chicago = {
                     creditorCpfCnpj: "63602987000134",
                     creditorProxy: "1b25f9c3-8c4c-4491-b67f-10cf007d500c", 
                     brazilCpf: d.cpf,
+                    brazilCnpj: d.cnpj
+                };
+                break;
+                
+            // ==============================
+            // OPTIMISED JOURNEY (PJ) - DADOS DO USUÁRIO
+            // ==============================
+            
+            case 'opt_core_v1_pj':
+                payload.resource = {
+                    loggedUserIdentification: d.cpf,
+                    creditorAccountIspb: d.ispbpj,
+                    creditorAccountIssuer: d.issuerpj,
+                    creditorAccountNumber: d.contapj,
+                    creditorAccountAccountType: d.tipopj,
+                    creditorName: d.empresa,
+                    brazilCpf: d.cpf,
+                    businessEntityIdentification: d.cnpj,
+                    brazilCnpj: d.cnpj,
+                    contractDebtorName: d.usuario,
+                    contractDebtorIdentification: d.cpf,
+                    creditorCpfCnpj: d.cnpj
+                };
+                break;
+
+            case 'opt_auto_v1_pj':
+                payload.resource = {
+                    loggedUserIdentification: d.cpf,
+                    creditorAccountIspb: d.ispbpj,
+                    creditorAccountIssuer: d.issuerpj,
+                    creditorAccountNumber: d.contapj,
+                    creditorAccountAccountType: d.tipopj,
+                    creditorName: d.empresa,
+                    brazilCpf: d.cpf,
+                    businessEntityIdentification: d.cnpj,
+                    brazilCnpj: d.cnpj
+                };
+                break;
+                
+            case 'opt_noredirect_v1_pj':
+                payload.resource = {
+                    loggedUserIdentification: d.cpf,
+                    creditorAccountIspb: d.ispbpj,
+                    creditorAccountIssuer: d.issuerpj,
+                    creditorAccountNumber: d.contapj,
+                    creditorAccountAccountType: d.tipopj,
+                    creditorName: d.empresa,
+                    creditorCpfCnpj: d.cnpj,
+                    brazilCpf: d.cpf,
+                    businessEntityIdentification: d.cnpj,
                     brazilCnpj: d.cnpj
                 };
                 break;
